@@ -1,0 +1,14 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script>
+	var socket = io('http://localhost:3000');
+	var requestData = {"userId":"123456789"}
+	requestData = JSON.stringify(requestData);
+ 	socket.emit('messageFromClient', requestData);
+ 	socket.on('messageFromServer', function (data) {
+		console.log(data);
+		if(data.performAction == 'UPDATE'){
+			var jsonStr = JSON.stringify(data);
+			document.body.innerHTML = jsonStr;
+		}
+	});
+</script>
